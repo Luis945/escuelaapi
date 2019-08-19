@@ -1,9 +1,12 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-const Model = use('Model')
+const mongoose = use('Mongoose')
 
-class Grado extends Model {
-}
+let schema = mongoose.Schema({
+  grado_Nombre:{type: String,require:true },
+  numero_grado:{type:Number,require:true, max:3},
+}, {
+  timestamps: true
+})
 
-module.exports = Grado
+module.exports = mongoose.model('Grado', schema)

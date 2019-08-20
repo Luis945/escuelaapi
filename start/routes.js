@@ -28,3 +28,11 @@ Route.get('/maestro','MaestroController.verMaestro');
  * Para post
 */
 Route.post('maestro','MaestroController.guardarMaestro');
+
+Route.post('/login', 'AuthController.Login');
+Route.post('/verify', 'AuthController.VerificarToken');
+
+
+Route.post('/alumni', 'AlumnoController.GuardarAlumno');
+
+Route.get('/alumno/:matricula', 'AuthController.VerAlumno');

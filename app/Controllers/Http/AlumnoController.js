@@ -17,8 +17,34 @@ async verMaestro({response}){
   await Alumno.find({},function(err,datos){
     obtenido= datos;
   });
-  return response.status(200).json({msg:'entró',obtenido}).
+  return response.status(200).json({msg:'entró',obtenido});
 }
+
+  async GuardarAlumno({request, response}) {
+    const { Matricula, Nombre, Apellido_paterno, Apellido_materno, Fecha_nacimiento, Fotografia, Direccion, Telefono, tipo_sangre, Curp, nombre_padre_tutor, telefono_padre_tutor } = request.all();
+
+    const alumno = new Alumno({
+      Matricula,
+      Nombre, 
+      Apellido_paterno, 
+      Apellido_materno, 
+      Fecha_nacimiento, 
+      Fotografia, 
+      Direccion, 
+      Telefono,
+      Datos_secundarios: {
+        tipo_sangre, 
+        Curp, 
+        nombre_padre_tutor, 
+        telefono_padre_tutor
+      }
+    });
+
+    alumno.save();
+
+    console.log(alumno);
+
+  }
 
 }
 

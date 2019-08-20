@@ -5,11 +5,11 @@ const mongoose = use('Mongoose')
 let schema = mongoose.Schema({
   Matricula:{type: String,require:true },
   Tutor:{type:Schema.Types.ObjectId, ref: 'Maestro'},
-  Grado:{type: String, max:2},
-  Seccion:{type:String,max:2},
+  Grado:{type:Schema.Types.ObjectId, ref: 'Grado'},
+  Seccion:{type:Schema.Types.ObjectId, ref: 'Seccion'},
   Maestros:[{type:Schema.Types.ObjectId, ref:'Maestro'}],
   Alumnos:[{type:Schema.Types.ObjectId, ref:'Alumno'}],
-  Materias:[{  }],
+  Materias:[{type:Schema.Types.ObjectId, ref:'Materia'  }],
 }, {
   timestamps: true
 })

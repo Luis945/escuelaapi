@@ -33,7 +33,6 @@ async verMaestro({response}){
       Direccion, 
       Telefono,
       Datos_secundarios: {
-        tipo_sangre, 
         Curp, 
         nombre_padre_tutor, 
         telefono_padre_tutor
@@ -41,9 +40,7 @@ async verMaestro({response}){
     });
 
     alumno.save();
-
-    console.log(alumno);
-
+    return alumno;
   }
 
 }

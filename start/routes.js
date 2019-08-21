@@ -32,10 +32,10 @@ Route.post('maestro','MaestroController.guardarMaestro');
 Route.post('/login', 'AuthController.Login');
 Route.post('/verify', 'AuthController.VerificarToken');
 
-
-Route.post('/alumni', 'AlumnoController.GuardarAlumno');
-
+/*-----Alumnos------*/
+Route.post('/GuardarAlumno', 'AlumnoController.GuardarAlumno');
 Route.get('/alumno/:matricula', 'AuthController.VerAlumno');
+
 
 /**Materia  */
 Route.post('/materia/setMateria','MateriaContoller.setMateria');

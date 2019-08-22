@@ -14,8 +14,8 @@ async showName({response}){
   var materias;
   var query= Materia.find({}).select('materia_Nombre ');
    await query.exec(function (err, someValue) {
-    if (err) return next(err);
-    materia= someValue
+   
+    materias= someValue;
     });
   return response.status(200).json({msg:'Show All',materias});
 }

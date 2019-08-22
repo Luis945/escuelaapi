@@ -21,8 +21,9 @@ async verMaestro({response}){
 }
 
   async GuardarAlumno({request, response}) {
-    const { Matricula, Nombre, Apellido_paterno, Apellido_materno, Fecha_nacimiento, Fotografia, Direccion, Telefono, tipo_sangre, Curp, nombre_padre_tutor, telefono_padre_tutor } = request.all();
 
+    const { Matricula, Nombre, Apellido_paterno, Apellido_materno, Fecha_nacimiento, Fotografia, Direccion, Curp, nombre_padre_tutor, telefono_padre_tutor } = request.all();
+  
     const alumno = new Alumno({
       Matricula,
       Nombre, 
@@ -31,7 +32,6 @@ async verMaestro({response}){
       Fecha_nacimiento, 
       Fotografia, 
       Direccion, 
-      Telefono,
       Datos_secundarios: {
         Curp, 
         nombre_padre_tutor, 

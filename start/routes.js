@@ -39,7 +39,8 @@ Route.get('/alumno/:matricula', 'AuthController.VerAlumno');
 
 
 /**Materia  */
-Route.post('/materia/setMateria','MateriaContoller.setMateria');
+Route.post('/materia/setMateria/','MateriaController.setMateria');
+Route.get('/materia/getMaterias/nombre','MateriaController.showName');
 Route.post('/materia/setUnidades','MateriaController.saveUnidades');
 Route.get('/materia/materias','MateriaController.showAll');
-Route.get('/materia/materia/grado/:grado','MateriaController.showByGrade');
+

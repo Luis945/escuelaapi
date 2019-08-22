@@ -10,18 +10,11 @@ async showAll({response}){
   });
   return response.status(200).json({msg:'Show All',materias});
 }
-async showByGrade({response,params}){
-  var {grado} = params
-  var materias
-  await Materia.find({grado_id,grado},(err,data)=>{
-    materias=data;
-  });
-  return response.status(200).json({msg:'Show by Grade',materias})
-}
+
 
 async setMateria ({response,request}) {
-  var {materia_Nombre,grado_id} = request.all();
-  var save = new Materia({materia_Nombre,grado_id});
+  var {materia_Nombre} = request.all();
+  var save = new Materia({materia_Nombre});
   await save.save();
   return response.status(200).json({msg:'Last data',save});
 }

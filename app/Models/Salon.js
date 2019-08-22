@@ -13,4 +13,4 @@ let schema = mongoose.Schema({
   timestamps: true
 })
 
-module.exports = mongoose.model('Maestro', schema)
+module.exports = mongoose.model('Salon', schema)

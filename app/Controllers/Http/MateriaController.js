@@ -10,7 +10,15 @@ async showAll({response}){
   });
   return response.status(200).json({msg:'Show All',materias});
 }
-
+async showName({response}){
+  var materias;
+  var query= Materia.find({}).select('materia_Nombre ');
+   await query.exec(function (err, someValue) {
+    if (err) return next(err);
+    materia= someValue
+    });
+  return response.status(200).json({msg:'Show All',materias});
+}
 
 async setMateria ({response,request}) {
   var {materia_Nombre} = request.all();

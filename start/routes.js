@@ -34,6 +34,7 @@ Route.post('/verify', 'AuthController.VerificarToken');
 
 /*-----Alumnos------*/
 Route.post('/GuardarAlumno', 'AlumnoController.GuardarAlumno');
+Route.get('/VerAlumnos','AlumnoController.VerAlumnos');
 Route.get('/alumno/:matricula', 'AuthController.VerAlumno');
 
 

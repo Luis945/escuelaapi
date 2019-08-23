@@ -36,6 +36,7 @@ Route.post('/verify', 'AuthController.VerificarToken');
 Route.post('/alumni', 'AlumnoController.GuardarAlumno');
 
 Route.get('/alumno/:matricula', 'AuthController.VerAlumno');
+Route.post('/calificar', 'CalificacioneController.Calificar');
 
 /**Materia  */
 Route.post('/materia/setMateria','MateriaContoller.setMateria');

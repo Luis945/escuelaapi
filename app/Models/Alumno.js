@@ -17,6 +17,11 @@ let schema = mongoose.Schema({
     nombre_padre_tutor:{type:String},
     telefono_padre_tutor:{type:Number},
   }],
+  calificaciones:[{
+    id_materia: { type: Number },
+    unidad: { type: Number },
+    calificacion: { type: Number}
+  }]
 }, {
   timestamps: true
 })

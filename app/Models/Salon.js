@@ -3,14 +3,12 @@
 const mongoose = use('Mongoose')
 
 let schema = mongoose.Schema({
-  Matricula:{type: String,require:true },
-  Grado:{type:Schema.Types.ObjectId, ref: 'Grado'},
-  Seccion:{type:Schema.Types.ObjectId, ref: 'Seccion'},
-  Maestros:[{type:Schema.Types.ObjectId, ref:'Maestro'}],
-  Alumnos:[{type:Schema.Types.ObjectId, ref:'Alumno'}],
-  Materias:[{type:Schema.Types.ObjectId, ref:'Materia'  }],
+  Grado:{type: String,require:true },
+  Seccion:{type: String,require:true },
+  Alumnos:[{type:String,require:true}],
+  Materias:[{ type:String,require:true}]
 }, { 
   timestamps: true
 })
 
-module.exports = mongoose.model('Maestro', schema)
+module.exports = mongoose.model('Salon', schema)

@@ -10,20 +10,24 @@ async showAll({response}){
   });
   return response.status(200).json({msg:'Show All',materias});
 }
-async showByGrade({response,params}){
-  var {grado} = params
-  var materias
-  await Materia.find({grado_id,grado},(err,data)=>{
-    materias=data;
-  });
-  return response.status(200).json({msg:'Show by Grade',materias})
+async showName({response}){
+  var materias;
+  var query= Materia.find({}).select('materia_Nombre ');
+   await query.exec(function (err, someValue) {
+   
+    materias= someValue;
+    });
+  return response.status(200).json({msg:'Show All',materias});
 }
 
 async setMateria ({response,request}) {
-  var {materia_Nombre,grado_id} = request.all();
-  var save = new Materia({materia_Nombre,grado_id});
+  var {materia_Nombre,unidades} = request.all();
+  var save= new Materia({
+    materia_Nombre,
+    unidades
+  });
   await save.save();
-  return response.status(200).json({msg:'Last data',save});
+  return response.status(200).json({msg:'Su materia se ha agregado correctamente',unidades});
 }
 
 async saveUnidades({response,request}){

@@ -3,25 +3,35 @@
 const Alumno = use('App/Models/Alumno');
 
 class AlumnoController {
-async guardarMaestro({response,request}){
-  const {Nombre,Apellido_paterno,Apellido_materno} = request.all();
-  const nuevo = new Alumno({
-    Nombre,
-    Apellido_paterno,
-    Apellido_materno,
-  });
 
-}
-async verMaestro({response}){
-  var obtenido;
-  await Alumno.find({},function(err,datos){
-    obtenido= datos;
-  });
-  return response.status(200).json({msg:'entró',obtenido});
-}
+  async VerAlumnos({response}){
+
+    var obtenido;
+    await Alumno.find({},function(err,datos){
+      obtenido= datos;
+    });
+    return response.status(200).json(obtenido);
+  }
 
   async GuardarAlumno({request, response}) {
-    const { Matricula, Nombre, Apellido_paterno, Apellido_materno, Fecha_nacimiento, Fotografia, Direccion, Telefono, tipo_sangre, Curp, nombre_padre_tutor, telefono_padre_tutor } = request.all();
+
+    const { Nombre, Apellido_paterno, Apellido_materno, Fecha_nacimiento, Fotografia, Direccion, Curp, nombre_padre_tutor, telefono_padre_tutor } = request.all();
+  
+    var res1=Nombre.split("",2);
+    var res2=Apellido_paterno.split("",2);
+    var res3=Apellido_materno.split("",2);
+    var fecha = new Date();
+
+    var Concat=
+    res1[0]+res1[1]+      //Nombre
+    res2[0]+res2[1]+      //Ap. Paterno
+    res3[0]+res3[1]+      //Ap. Materno
+    fecha.getFullYear()+fecha.getMilliseconds();  //Año,Milisegundo
+    var Matricula=Concat.toUpperCase();
+
+    var Generacion=fecha.getFullYear();
+    
+    Matricula.toUpperCase();
 
     const alumno = new Alumno({
       Matricula,
@@ -31,9 +41,8 @@ async verMaestro({response}){
       Fecha_nacimiento, 
       Fotografia, 
       Direccion, 
-      Telefono,
+      Generacion,
       Datos_secundarios: {
-        tipo_sangre, 
         Curp, 
         nombre_padre_tutor, 
         telefono_padre_tutor
@@ -41,9 +50,7 @@ async verMaestro({response}){
     });
 
     alumno.save();
-
-    console.log(alumno);
-
+    return alumno;
   }
 
 }

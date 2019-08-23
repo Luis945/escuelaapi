@@ -10,7 +10,7 @@ let schema = mongoose.Schema({
   Fecha_nacimiento:{type: Date},
   Fotografia: {type:String},
   Direccion: {type:String},
-  Telefono: {type:Number},
+  Generacion:{type:String},
   Datos_secundarios:[{
     tipo_sangre: {type:String, max:3},
     Curp:{type: String, max:18},

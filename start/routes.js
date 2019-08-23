@@ -32,14 +32,16 @@ Route.post('maestro','MaestroController.guardarMaestro');
 Route.post('/login', 'AuthController.Login');
 Route.post('/verify', 'AuthController.VerificarToken');
 
-
-Route.post('/alumni', 'AlumnoController.GuardarAlumno');
-
+/*-----Alumnos------*/
+Route.post('/GuardarAlumno', 'AlumnoController.GuardarAlumno');
+Route.get('/VerAlumnos','AlumnoController.VerAlumnos');
 Route.get('/alumno/:matricula', 'AuthController.VerAlumno');
 Route.post('/calificar', 'CalificacioneController.Calificar');
 
+
 /**Materia  */
-Route.post('/materia/setMateria','MateriaContoller.setMateria');
+Route.post('/materia/setMateria/','MateriaController.setMateria');
+Route.get('/materia/getMaterias/nombre','MateriaController.showName');
 Route.post('/materia/setUnidades','MateriaController.saveUnidades');
 Route.get('/materia/materias','MateriaController.showAll');
-Route.get('/materia/materia/grado/:grado','MateriaController.showByGrade');
+

@@ -46,3 +46,7 @@ Route.post('/materia/setUnidades/','MateriaController.saveUnidades');
 Route.get('/materia/materias/','MateriaController.showAll');
 Route.delete('/materia/eliminar/:id','MateriaController.eliminarMateria');
 
+
+/**GRUPOS */
+Route.post('/creargrupo','SalonController.setSalon');
+

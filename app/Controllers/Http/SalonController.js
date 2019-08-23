@@ -1,14 +1,20 @@
 'use strict'
+const Salon= use('App/Models/Salon');
 
 class SalonController {
-    async setMateria ({response,request}) {
-        var {materia_Nombre,unidades} = request.all();
-        var save= new Materia({
-          materia_Nombre,
-          unidades
+    
+    async setSalon ({response,request}) {
+        console.log('entroooooooooooo');
+        var {Grado,Seccion,Maestros,Alumnos,Materias}= request.all();
+        var salon= new Salon({
+          Grado,
+          Seccion,
+          Maestros,
+          Alumnos,
+          Materias
         });
-        await save.save();
-        return response.status(200).json({msg:'Su materia se ha agregado correctamente',unidades});
+        await salon.save();
+        return response.status(200).json(salon);
       }
 }
 

@@ -10,7 +10,6 @@ let schema = mongoose.Schema({
   Rfc:{type: String, max:18  },
   Fotografia: {type:String},
   Datos_secundarios:[{
-    tipo_sangre: {type:String, max:3},
     direccion: {type:String},
     curriculum: {type:String},
     telefono:{type:Number},

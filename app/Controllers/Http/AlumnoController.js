@@ -46,7 +46,7 @@ class AlumnoController {
         Curp, 
         nombre_padre_tutor, 
         telefono_padre_tutor
-      }
+      },
     });
 
     alumno.save();

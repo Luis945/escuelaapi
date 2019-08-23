@@ -10,12 +10,18 @@ let schema = mongoose.Schema({
   Fecha_nacimiento:{type: Date},
   Fotografia: {type:String},
   Direccion: {type:String},
+  Generacion:{type:String},
   Datos_secundarios:[{
     tipo_sangre: {type:String, max:3},
     Curp:{type: String, max:18},
     nombre_padre_tutor:{type:String},
     telefono_padre_tutor:{type:Number},
   }],
+  calificaciones:[{
+    id_materia: { type: Number },
+    unidad: { type: Number },
+    calificacion: { type: Number}
+  }]
 }, {
   timestamps: true
 })

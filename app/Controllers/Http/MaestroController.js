@@ -4,6 +4,15 @@ const Maestro = use('App/Models/Maestro');
 
 class MaestroController {
 
+  async VerMaestros(){
+    var obtenido;
+    await Maestro.find({}).exec((error,datos)=>{
+      obtenido=datos;
+    })
+
+    return response.status(200).json(obtenido);
+  }
+
   async RegistroMaestro({response,request}){
 
     var {Nombre,Apellido_paterno,Apellido_materno,Fecha_nacimiento,Rfc,Fotografia,Direccion,Telefono} = request.all();

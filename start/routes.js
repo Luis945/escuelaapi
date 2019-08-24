@@ -49,4 +49,5 @@ Route.delete('/materia/eliminar/:id','MateriaController.eliminarMateria');
 
 /**GRUPOS */
 Route.post('/creargrupo','SalonController.setSalon');
+Route.get('/verSalones','SalonController.getSalones');
 

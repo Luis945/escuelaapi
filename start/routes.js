@@ -50,4 +50,7 @@ Route.delete('/materia/eliminar/:id','MateriaController.eliminarMateria');
 
 /**GRUPOS */
 Route.post('/creargrupo','SalonController.setSalon');
+Route.get('/verSalones','SalonController.getSalones');
+Route.post('/crearmaestro','SalonController.setMaestro');
+Route.get('/vermaestros','SalonController.VerMaestros');
 

@@ -60,4 +60,5 @@ Route.post('/VerMaestros','MaestroController.VerMaestros');
 
 /* Calificaciones */
 Route.post('/calificar', 'CalificacioneController.Calificar');
-Route.get('/salon/:grado/:seccion', 'CalificacioneController.GetAlumnos');
+Route.get('/salon/:grado/:seccion/:ciclo/:materia', 'CalificacioneController.GetAlumnos');
+Route.post('/pipi', 'CalificacioneController.insertpipi');

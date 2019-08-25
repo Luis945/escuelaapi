@@ -13,6 +13,25 @@ class MaestroController {
     return response.status(200).json(obtenido);
   }
 
+  async ActualizaMaestro({response,request}){
+
+    const {_id,Nombre,Apellido_paterno,Apellido_materno,Rfc,Direccion,Telefono}= request.all();
+
+    const Al= await Maestro.updateOne({_id:_id},
+       {
+         _id:_id,
+         Nombre:Nombre,
+         Apellido_paterno:Apellido_paterno,
+         Apellido_materno:Apellido_materno,
+         Rfc:Rfc,
+         Direccion:Direccion,
+         Telefono:Telefono
+        }
+      );
+
+    return Al;
+  }
+
   async RegistroMaestro({response,request}){
 
     var {Nombre,Apellido_paterno,Apellido_materno,Fecha_nacimiento,Rfc,Fotografia,Direccion,Telefono} = request.all();

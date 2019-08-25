@@ -57,4 +57,4 @@ Route.get('/vermaestros','SalonController.VerMaestros');
 /*-------MAESTROS------*/
 Route.post('/RegistroMaestro','MaestroController.RegistroMaestro');
 Route.post('/VerMaestros','MaestroController.VerMaestros');
-
+Route.post('/ActualizaMaestro','MaestroController.ActualizaMaestro');

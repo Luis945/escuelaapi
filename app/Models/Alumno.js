@@ -1,6 +1,7 @@
 'use strict'
 
 const mongoose = use('Mongoose')
+var Schema = mongoose.Schema;
 
 let schema = mongoose.Schema({
   Matricula:{type:String, max:10},
@@ -8,6 +9,7 @@ let schema = mongoose.Schema({
   Apellido_paterno:{type: String,require:true},
   Apellido_materno:{type: String,require:true},
   Fecha_nacimiento:{type: Date},
+  Status:{type:String},
   Fotografia: {type:String},
   Direccion: {type:String},
   Generacion:{type:String},
@@ -18,7 +20,7 @@ let schema = mongoose.Schema({
     telefono_padre_tutor:{type:Number},
   }],
   calificaciones:[{
-    id_materia: { type: Number },
+    id_materia: { type: Schema.Types.ObjectId, ref: 'Materia' },
     unidad: { type: Number },
     calificacion: { type: Number}
   }]

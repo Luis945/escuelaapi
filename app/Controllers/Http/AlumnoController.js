@@ -1,6 +1,7 @@
 'use strict'
 
 const Alumno = use('App/Models/Alumno');
+const mongoose = use('Mongoose');
 
 class AlumnoController {
 
@@ -43,6 +44,7 @@ class AlumnoController {
     var Generacion=fecha.getFullYear();
     
     Matricula.toUpperCase();
+    var Status = 'sin_asignar'
 
     const alumno = new Alumno({
       Matricula,
@@ -50,6 +52,7 @@ class AlumnoController {
       Apellido_paterno, 
       Apellido_materno, 
       Fecha_nacimiento, 
+      Status,
       Fotografia, 
       Direccion, 
       Generacion,
@@ -57,10 +60,25 @@ class AlumnoController {
         Curp, 
         nombre_padre_tutor, 
         telefono_padre_tutor
-      }
+      },
+      calificaciones: []
+    });
+    // alumno.save();
+    alumno.save(function (err) {
+      if (err) return handleError(err);
+      console.log(err);
+      // const story1 = new Story({
+      //   title: 'Casino Royale',
+      //   author: author._id    // assign the _id from the person
+      // });
+    
+      // story1.save(function (err) {
+      //   if (err) return handleError(err);
+      //   // thats it!
+      // });
     });
 
-    alumno.save();
+
     return alumno;
   }
 

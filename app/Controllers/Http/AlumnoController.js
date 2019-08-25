@@ -8,14 +8,21 @@ class AlumnoController {
   async VerAlumnos({response}){
 
     var obtenido;
-    await Alumno.find({},function(err,datos){
-      obtenido= datos;
-    });
+    await Alumno.find({}).exec((error,datos)=>{
+      obtenido=datos;
+    })
+
     return response.status(200).json(obtenido);
   }
 
-  ActualizaAlumno({response}){
-    
+  async ActualizaAlumno({response,request}){
+
+    var _id= request.find.all();
+    console.log(_id);
+
+    const Al= await Alumno.updateOne({_id:_id},{ $set: { Datos_secundarios:{Curp:'adsfcdgvfhdg'}   }});
+
+    return Al;
   }
 
   async GuardarAlumno({request, response}) {

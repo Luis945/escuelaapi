@@ -9,13 +9,12 @@ let schema = mongoose.Schema({
   Fecha_nacimiento:{type: Date},
   Rfc:{type: String, max:18  },
   Fotografia: {type:String},
-  Datos_secundarios:[{
-    direccion: {type:String},
-    curriculum: {type:String},
-    telefono:{type:Number},
-  }],
-}, {
-  timestamps: true
-})
+  Direccion: {type:String},
+  curriculum: {type:String},
+  Telefono:{type:Number},
+  },
+  {
+    timestamps: true
+  });
 
 module.exports = mongoose.model('Maestro', schema)

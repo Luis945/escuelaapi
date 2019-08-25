@@ -34,6 +34,7 @@ Route.post('/verify', 'AuthController.VerificarToken');
 
 /*-----Alumnos------*/
 Route.post('/GuardarAlumno', 'AlumnoController.GuardarAlumno');
+Route.post('/ActualizaAlumno','AlumnoController.ActualizaAlumno');
 Route.get('/VerAlumnos','AlumnoController.VerAlumnos');
 Route.get('/alumno/:matricula', 'AuthController.VerAlumno');
 
@@ -49,6 +50,13 @@ Route.delete('/materia/eliminar/:id','MateriaController.eliminarMateria');
 
 /**GRUPOS */
 Route.post('/creargrupo','SalonController.setSalon');
+Route.get('/verSalones','SalonController.getSalones');
+Route.post('/crearmaestro','SalonController.setMaestro');
+Route.get('/vermaestros','SalonController.VerMaestros');
+
+/*-------MAESTROS------*/
+Route.post('/RegistroMaestro','MaestroController.RegistroMaestro');
+Route.post('/VerMaestros','MaestroController.VerMaestros');
 
 /* Calificaciones */
 Route.post('/calificar', 'CalificacioneController.Calificar');

@@ -53,8 +53,9 @@ Route.post('/creargrupo','SalonController.setSalon');
 Route.get('/verSalones','SalonController.getSalones');
 Route.post('/crearmaestro','SalonController.setMaestro');
 Route.get('/vermaestros','SalonController.VerMaestros');
-
+Route.delete('/eliminargrupo/:id','SalonController.eliminarSalon');
 /*-------MAESTROS------*/
 Route.post('/RegistroMaestro','MaestroController.RegistroMaestro');
 Route.post('/VerMaestros','MaestroController.VerMaestros');
+
 

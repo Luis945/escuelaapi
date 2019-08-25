@@ -7,7 +7,9 @@ const Maestro = use('App/Models/Maestro');
 class SalonController {
     
     async setSalon ({response,request}) {
+      
         console.log(request.all())
+       
         var {Grado,Seccion,Ciclo,Maestro,Alumnos,Materias}= request.all();
         var salon= new Salon({
           Grado,
@@ -18,7 +20,19 @@ class SalonController {
           Materias
         });
         await salon.save();
-        return response.status(200).json(salon);
+        console.log(salon.Alumnos);
+        salon.Alumnos.forEach(id => {
+          Alumno.findById(id, function (err, alumnito) {
+            console.log("aqui")
+            console.log(alumnito.Nombre);
+            Alumno.updateOne({ _id: id }, { Nombre: 'USS Enterprise' });
+          });
+      
+        }
+);
+       
+
+        
       }
 
     async setMaestro({response,request}){
@@ -37,12 +51,18 @@ class SalonController {
     }
 
     async VerMaestros({response}){
-
       var maestros;
       await Maestro.find({},function(err,datos){
         maestros= datos;
       });
       return response.status(200).json(maestros);
+    }
+
+    async eliminarSalon({response,params}){
+      await Salon.findByIdAndRemove(params.id).exec();
+      await Salon.find({}).exec((err,salones)=>{
+        return response.status(200).json({msg:'elemento eliminado',salones})
+      });
     }
 }
 

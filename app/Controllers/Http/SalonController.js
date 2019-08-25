@@ -7,10 +7,35 @@ const Maestro = use('App/Models/Maestro');
 class SalonController {
     
     async setSalon ({response,request}) {
-      console.log(request.all())
-      var {Grado,Seccion,Ciclo,Maestro,Alumnos,Materias}= request.all();
+      
+        console.log(request.all())
+        var {Grado,Seccion,Ciclo,Maestro,Alumnos,Materias}= request.all();
+        var salon= new Salon({
+          Grado,
+          Seccion,
+          Ciclo,
+          Maestro,
+          Alumnos,
+          Materias
+        });
 
-      //se encuentran las materias dada una lista de ids
+        var _idchido;
+
+        for (let index = 0; index < salon.Alumnos.length; index++) {
+          const element = salon.Alumnos[index];
+          _idchido = element;
+          Alumno.findById(element, function (err, alumnito) {
+            console.log("aqui")
+            console.log(alumnito.Nombre);
+         
+          });
+
+          await Alumno.updateOne({ _id:_idchido }, { Status: 'asignado' });
+        }
+
+        //hasta aqui es mio octavioooooooooooooooooooooooooooo
+
+         //se encuentran las materias dada una lista de ids
       var materiasAInsertar = [];
       await Materia.find({'_id': { $in: Materias}}, 
       function(err, docs) {
@@ -37,17 +62,11 @@ class SalonController {
         // await Alumno.findOneAndUpdate({_id: Alumnos[i]._id}, {$push: {calificaciones: calificaciones}});
       }
 
-      var salon= new Salon({
-        Grado,
-        Seccion,
-        Ciclo,
-        Maestro,
-        Alumnos,
-        Materias
-      });
         await salon.save();
-      return response.status(200).json("ok");
-    }
+        return salon;
+          
+        }
+
 
     async setMaestro({response,request}){
       var {Nombre,Apellido_paterno,Apellido_materno,Fecha_nacimiento,Rfc}= request.all();
@@ -77,6 +96,15 @@ class SalonController {
       await Salon.find({}).exec((err,salones)=>{
         return response.status(200).json({msg:'elemento eliminado',salones})
       });
+    }
+    async getAlumnos({response}){
+      var obtenido;
+      await Alumno.find({Status:'sin_asignar'}).exec((error,datos)=>{
+        obtenido=datos;
+        console.log(obtenido)
+      })
+  
+      return response.status(200).json(obtenido);
     }
 }
 

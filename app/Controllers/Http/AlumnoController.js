@@ -44,6 +44,7 @@ class AlumnoController {
     var Generacion=fecha.getFullYear();
     
     Matricula.toUpperCase();
+    var Status = 'sin_asignar'
 
     const alumno = new Alumno({
       Matricula,
@@ -51,6 +52,7 @@ class AlumnoController {
       Apellido_paterno, 
       Apellido_materno, 
       Fecha_nacimiento, 
+      Status,
       Fotografia, 
       Direccion, 
       Generacion,

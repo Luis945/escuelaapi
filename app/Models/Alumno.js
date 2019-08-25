@@ -9,6 +9,7 @@ let schema = mongoose.Schema({
   Apellido_paterno:{type: String,require:true},
   Apellido_materno:{type: String,require:true},
   Fecha_nacimiento:{type: Date},
+  Status:{type:String},
   Fotografia: {type:String},
   Direccion: {type:String},
   Generacion:{type:String},

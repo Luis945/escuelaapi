@@ -15,7 +15,7 @@ class MaestroController {
 
   async ActualizaMaestro({response,request}){
 
-    const {_id,Nombre,Apellido_paterno,Apellido_materno,Rfc,Direccion,Telefono}= request.all();
+    const {_id,Nombre,Apellido_paterno,Apellido_materno,Direccion,Telefono}= request.all();
 
     const Al= await Maestro.updateOne({_id:_id},
        {
@@ -23,7 +23,6 @@ class MaestroController {
          Nombre:Nombre,
          Apellido_paterno:Apellido_paterno,
          Apellido_materno:Apellido_materno,
-         Rfc:Rfc,
          Direccion:Direccion,
          Telefono:Telefono
         }

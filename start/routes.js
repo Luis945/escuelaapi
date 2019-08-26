@@ -55,6 +55,7 @@ Route.post('/crearmaestro','SalonController.setMaestro');
 Route.get('/vermaestros','SalonController.VerMaestros');
 Route.delete('/eliminargrupo/:id','SalonController.eliminarSalon');
 Route.get('/verAlumnos_octa','SalonController.getAlumnos');
+Route.post('/eliminaralumnosalon/:id','SalonController.eliminaralumnosalon');
 /*-------MAESTROS------*/
 Route.post('/RegistroMaestro','MaestroController.RegistroMaestro');
 Route.post('/VerMaestros','MaestroController.VerMaestros');

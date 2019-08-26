@@ -108,6 +108,19 @@ class SalonController {
   
       return response.status(200).json(obtenido);
     }
+
+    async eliminaralumnosalon ({response,params,request}){
+      var alumnos;
+      var salon= request.all();
+       alumnos = salon.Alumnos;
+      console.log(params.id)
+      await Salon.updateOne({_id: salon._id},{ $pullAll: {Alumnos: [params.id] }})
+      console.log('llego aqui')
+      
+      return  response.status(200).json(salon);
+
+      
+    }
 }
 
 module.exports = SalonController

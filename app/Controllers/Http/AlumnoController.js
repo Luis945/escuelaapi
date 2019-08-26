@@ -17,10 +17,17 @@ class AlumnoController {
 
   async ActualizaAlumno({response,request}){
 
-    var _id= request.find.all();
-    console.log(_id);
+    var {_id,Nombre, Apellido_paterno, Apellido_materno, Direccion,nombre_padre_tutor, telefono_padre_tutor}= request.all();
 
-    const Al= await Alumno.updateOne({_id:_id},{ $set: { Datos_secundarios:{Curp:'adsfcdgvfhdg'}   }});
+    const Al= await Alumno.updateOne({_id:_id},
+      { Nombre:Nombre,
+        Apellido_paterno:Apellido_paterno,
+        Apellido_materno:Apellido_materno,
+        Direccion:Direccion,
+        Datos_secundarios:{
+          nombre_padre_tutor:nombre_padre_tutor,
+          telefono_padre_tutor:telefono_padre_tutor}   
+      });
 
     return Al;
   }

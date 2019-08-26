@@ -9,11 +9,36 @@ const Materia = use('App/Models/Materia');
 
 class CalificacioneController {
 
-    Calificar({request, response}) {
+    async Calificar({request, response}) {
         const { calificaciones } = request.all();
 
-        console.log(calificaciones);
-        console.log("---------------------")
+        for (let i = 0; i < calificaciones.length; i++) {
+            // console.log("---------------------");
+            // console.log(calificaciones[i].Matricula);
+            // console.log("---------------------");
+            // console.log(calificaciones[i].id_materia);
+            // console.log("---------------------");
+            // console.log(calificaciones[i].unidad);
+            // console.log("---------------------");
+            // console.log(calificaciones[i].calificacion);
+            // console.log("---------------------");
+            await Alumno.findOneAndUpdate({
+                Matricula: calificaciones[i].Matricula, 
+                calificaciones: {
+                    $elemMatch: {
+                        id_materia: calificaciones[i].id_materia, 
+                        unidad: calificaciones[i].unidad
+                    }
+                }
+            },
+            {$set: {'calificaciones.$.calificacion': calificaciones[i].calificacion}},
+            {'new': true, 'safe': true, 'upsert': true});
+        }
+
+        return response.status(200).json({
+            salon: "calificao"
+        });
+
     }
 
     async GetAlumnos({response, request, params}) {
@@ -39,33 +64,18 @@ class CalificacioneController {
     }
 
     async insertpipi({request, response}) {
-        var {id} = request.all();
-        var getMateria;
+        var {id, matricula, unidad} = request.all();
 
-        var calificacion = [{
-            id_materia: "5d62272130c55468709e7c3b",
-    unidad: 2,
-    calificacion: 10
-        },
-        {
-            id_materia: "5d62272130c55468709e7c3b",
-    unidad: 3,
-    calificacion: 8
-        }];
-        
-        await Alumno.findOneAndUpdate({_id: id}, {$push: {calificaciones: null}});
+        await Alumno.findOneAndUpdate({Matricula: matricula, calificaciones: {$elemMatch: {id_materia: id, unidad: unidad}}},
+            {$set: {'calificaciones.$.calificacion': 6}}, // list fields you like to change
+            {'new': true, 'safe': true, 'upsert': true});
 
-        // Users.findOneAndUpdate({name: req.user.name}, {$push: {friends: friend}});
-
-        // alu.save();
-
-
-        var aluw = await Alumno.findById(id,(err,materia)=>{
-            getMateria = materia;
-        });
+        // var aluw = await Alumno.findById(id,(err,materia)=>{
+        //     getMateria = materia;
+        // });
 
         return response.status(200).json({
-            salon: getMateria
+            salon: 200
         });
     }
 

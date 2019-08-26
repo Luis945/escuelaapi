@@ -46,6 +46,7 @@ class SalonController {
       //await no jala en un foreach :'( ahi dispensen el desmadre
       for (let i = 0; i < Alumnos.length; i++) {
         // var calificaciones;
+        console.log(Alumnos[i]);
         for (let j = 0; j < materiasAInsertar.length; j++) {
           var calificaciones;
           for (let k = 0; k < materiasAInsertar[j].unidades.length; k++) {
@@ -55,6 +56,7 @@ class SalonController {
               calificacion: 0
             };
             await Alumno.findOneAndUpdate({_id: Alumnos[i]._id}, {$push: {calificaciones: calificaciones}});
+            console.log("materia guardada???");
           }
           
         }

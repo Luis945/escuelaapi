@@ -72,7 +72,7 @@ class AlumnoController {
     });
     // alumno.save();
     alumno.save(function (err) {
-      if (err) return handleError(err);
+      // if (err) return handleError(err);
       console.log(err);
       // const story1 = new Story({
       //   title: 'Casino Royale',

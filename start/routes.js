@@ -58,6 +58,7 @@ Route.get('/verAlumnos_octa','SalonController.getAlumnos');
 /*-------MAESTROS------*/
 Route.post('/RegistroMaestro','MaestroController.RegistroMaestro');
 Route.post('/VerMaestros','MaestroController.VerMaestros');
+Route.post('/ActualizaMaestro','MaestroController.ActualizaMaestro');
 
 /* Calificaciones */
 Route.post('/calificar', 'CalificacioneController.Calificar');

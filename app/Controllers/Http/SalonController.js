@@ -3,6 +3,7 @@ const Salon= use('App/Models/Salon');
 const Alumno = use('App/Models/Alumno');
 const Materia = use('App/Models/Materia');
 const Maestro = use('App/Models/Maestro');
+const Chat = use('App/Models/Chat');
 
 class SalonController {
     
@@ -64,7 +65,23 @@ class SalonController {
         // await Alumno.findOneAndUpdate({_id: Alumnos[i]._id}, {$push: {calificaciones: calificaciones}});
       }
 
-        await salon.save();
+        // await salon.save();
+        await salon.save(function (err) {
+          console.log(err)
+          const chatin = new Chat({
+            Salon: salon._id,
+            Mensajes: [{
+              Mensaje: "Bienvenido al grupo de chat del salón de su hij@. Aquí puede hablar con otros padres y con el profesor",
+              Emisor: "Administración"
+            }]
+          });
+
+          chatin.save(function (err) {
+            console.log(err)
+            // thats it!
+          });
+          // saved!
+        });
         return salon;
           
         }

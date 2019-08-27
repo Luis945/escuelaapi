@@ -3,7 +3,7 @@ const Alerta = use('App/Models/Alerta');
 const Alumno = use('App/Models/Alumno');
 const Materia = use('App/Models/Materia');
 const Maestro = use('App/Models/Maestro');
-
+const Salon= use('App/Models/Salon');
 
 class AlertaController {
   async show({response}){
@@ -53,6 +53,11 @@ class AlertaController {
     await Alerta.find({}).exec((err,alertas)=>{
     return response.status(200).json({msg:'elemento eliminado',alertas})
   });
+  }
+  async getsalonProfe({response,params}){
+    await Salon.find({'Maestro',params.id}).populate('Alumnos').populate('Maestro').exec((err,salones)=>{
+      return response.status(200).json({msg:'lista de alumnos',salones});
+    });
   }
 }
 

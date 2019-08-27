@@ -65,6 +65,8 @@ Route.post('/ActualizaMaestro','MaestroController.ActualizaMaestro');
 Route.post('/calificar', 'CalificacioneController.Calificar');
 Route.get('/salon/:grado/:seccion/:ciclo/:materia', 'CalificacioneController.GetAlumnos');
 Route.post('/pipi', 'CalificacioneController.insertpipi');
+Route.get('/calificar/info', 'CalificacioneController.getSalonesYMaterias');
+Route.get('/calificaciones/:_id/:ciclo', 'CalificacioneController.GetCalificacionesAlumno');
 
 /** alertas maestros a alumnos */
 
@@ -74,3 +76,7 @@ Route.get('/alertas/ver/alumno/:id','AlertaController.find_alumno');
 Route.post('/alertas/guardar/','AlertaController.save');
 Route.post('/alertas/editar/','AlertaController.edit');
 Route.delete('/alertas/remover/:id','AlertaController.remove');
+
+/* Chat padres y pofes */
+Route.get('/chat/:id', 'ChatController.historial');
+Route.post('/chat', 'ChatController.guardarMensaje');

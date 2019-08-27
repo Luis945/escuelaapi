@@ -2,6 +2,7 @@
 
 const Alumno = use('App/Models/Alumno');
 const Maistro = use('App/Models/Maestro');
+const Salon = use('App/Models/Salon');
 var jwt = require('jsonwebtoken');
 const Encryption = use('Encryption');
 
@@ -37,7 +38,7 @@ class AuthController {
 
             var usuario;
             var tipoUsuario = "";
-            var idAlumno;
+            var idAlumno = "";
             var alumno;
             // console.log("alumno")
             var datat = await Alumno.findOne({
@@ -68,6 +69,26 @@ class AuthController {
                 }
                 console.log("alumno encontrao")
             }
+            var saloncito;
+
+            var ciclo = new Date().getFullYear();
+            // console.log(idAlumno);
+            if (idAlumno !=  "") {
+                await Salon.find({
+                    Ciclo: "2017"//ciclo.toString(),
+                }).populate({
+                    path: 'Alumnos',
+                    match: { _id: {$in: [idAlumno]} }
+                })
+                .exec((err, salones) => {
+                    saloncito = salones.find((salon) => {
+                        console.log(salon)
+                        return salon.Alumnos.length > 0;
+                    });
+                });
+
+                // console.log(saloncito);
+            }
 
             if ( tipoUsuario === "") {
                 console.log("maestro")
@@ -77,11 +98,25 @@ class AuthController {
                         Telefono: curp
                     });
 
-                    if(usuario) {tipoUsuario = "profe"}
+                    if(usuario) {
+                        tipoUsuario = "profe";
+                        // await Salon.find({
+                        //     Ciclo: "2017"//ciclo.toString(),
+                        // }).populate({
+                        //     path: 'Maestro',
+                        //     // match: { _id: {$in: [idAlumno]} }
+                        // })
+                        // .exec((err, salones) => {
+                        //     salones.find((salon) => {
+                        //         console.log(salon)
+                        //         return salon.Alumnos.length > 0;
+                        //     });
+                        // });
+                    }
                 }
             }
 
-            console.log("okenenne")
+            // console.log("okenenne")
 
             var token = usuario ? token = jwt.sign({usuario}, 'LAMEv3') : '';
             // console.log(token)
@@ -89,12 +124,23 @@ class AuthController {
                 throw new Error('Las credenciales no concuerdan con los registros, verifique.');
             }
 
+            var salonid = 0;
+            var nombrepapi = "NADIE";
+            if (saloncito) {
+                salonid = saloncito._id;
+                nombrepapi = usuario.Datos_secundarios[0].nombre_padre_tutor
+                console.log(nombrepapi)
+            }
+
             return response.status(200).json({
                 token: token,
                 tipo: tipoUsuario,
                 alumno: alumno,
                 _id: idAlumno,
-                status: 200
+                status: 200,
+                ciclo: ciclo,
+                salon: salonid,
+                tutor: nombrepapi
             });
         } catch (error) {
             console.log(error);

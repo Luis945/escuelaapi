@@ -46,7 +46,7 @@ Route.get('/materia/getMaterias/nombre/','MateriaController.showName');
 Route.post('/materia/setUnidades/','MateriaController.saveUnidades');
 Route.get('/materia/materias/','MateriaController.showAll');
 Route.delete('/materia/eliminar/:id','MateriaController.eliminarMateria');
-
+Route.post('/materia/editar/','MateriaController.editarMateria');
 
 /**GRUPOS */
 Route.post('/creargrupo','SalonController.setSalon');
@@ -64,7 +64,4 @@ Route.post('/ActualizaMaestro','MaestroController.ActualizaMaestro');
 /* Calificaciones */
 Route.post('/calificar', 'CalificacioneController.Calificar');
 Route.get('/salon/:grado/:seccion/:ciclo/:materia', 'CalificacioneController.GetAlumnos');
-Route.get('/calificar/info', 'CalificacioneController.getSalonesYMaterias');
-Route.get('/calificaciones/:_id/:ciclo', 'CalificacioneController.GetCalificacionesAlumno');
 Route.post('/pipi', 'CalificacioneController.insertpipi');
-Route.post('/popo', 'CalificacioneController.validapopo')

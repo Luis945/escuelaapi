@@ -100,18 +100,18 @@ class AuthController {
 
                     if(usuario) {
                         tipoUsuario = "profe";
-                        // await Salon.find({
-                        //     Ciclo: "2017"//ciclo.toString(),
-                        // }).populate({
-                        //     path: 'Maestro',
-                        //     // match: { _id: {$in: [idAlumno]} }
-                        // })
-                        // .exec((err, salones) => {
-                        //     salones.find((salon) => {
-                        //         console.log(salon)
-                        //         return salon.Alumnos.length > 0;
-                        //     });
-                        // });
+                        await Salon.find({
+                            Ciclo: "2017"//ciclo.toString(),
+                        }).populate({
+                            path: 'Maestro',
+                            match: { _id: {$in: [usuario._id]} }
+                        })
+                        .exec((err, salones) => {
+                            saloncito = salones.find((salon) => {
+                                console.log(salon)
+                                return salon.Alumnos.length > 0;
+                            });
+                        });
                     }
                 }
             }
@@ -126,9 +126,16 @@ class AuthController {
 
             var salonid = 0;
             var nombrepapi = "NADIE";
+            var salonNom = "NINGUNO";
             if (saloncito) {
                 salonid = saloncito._id;
-                nombrepapi = usuario.Datos_secundarios[0].nombre_padre_tutor
+                if (tipoUsuario != "profe") {
+                    nombrepapi = usuario.Datos_secundarios[0].nombre_padre_tutor;
+                } else {
+                    nombrepapi = 'Prof. ' + saloncito.Maestro.Nombre + ' ' + saloncito.Maestro.Apellido_paterno;
+
+                }
+                salonNom = new String(saloncito.Grado + '° ' + saloncito.Seccion + ' (' + saloncito.Ciclo + ')');
                 console.log(nombrepapi)
             }
 
@@ -140,7 +147,8 @@ class AuthController {
                 status: 200,
                 ciclo: ciclo,
                 salon: salonid,
-                tutor: nombrepapi
+                tutor: nombrepapi,
+                salonNom: salonNom
             });
         } catch (error) {
             console.log(error);

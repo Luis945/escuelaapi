@@ -65,3 +65,12 @@ Route.post('/ActualizaMaestro','MaestroController.ActualizaMaestro');
 Route.post('/calificar', 'CalificacioneController.Calificar');
 Route.get('/salon/:grado/:seccion/:ciclo/:materia', 'CalificacioneController.GetAlumnos');
 Route.post('/pipi', 'CalificacioneController.insertpipi');
+
+/** alertas maestros a alumnos */
+
+Route.get('/alertas/ver/','AlertaController.show');
+Route.get('/alertas/ver/maestro/:id','AlertaController.find_maestro');
+Route.get('/alertas/ver/alumno/:id','AlertaController.find_alumno');
+Route.post('/alertas/guardar/','AlertaController.save');
+Route.post('/alertas/editar/','AlertaController.edit');
+Route.delete('/alertas/remover/:id','AlertaController.remove');

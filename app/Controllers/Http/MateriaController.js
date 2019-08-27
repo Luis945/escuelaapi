@@ -44,6 +44,18 @@ async eliminarMateria({response,params}){
   });
 }
 
+async editarMateria({response,request}){
+  var {id,materia_Nombre,unidades} = request.all();
+
+    await Materia.findOne({'_id':id}).exec((err,materia)=>{
+      materia.materia_Nombre= materia_Nombre;
+      materia.unidades= unidades;
+      materia.save();
+    });
+    await Materia.find({}).exec((err,materias)=>{
+      return response.status(200).json({msg:'mandar todo',materias})
+    });
+}
 }
 
 module.exports = MateriaController

@@ -67,3 +67,4 @@ Route.get('/salon/:grado/:seccion/:ciclo/:materia', 'CalificacioneController.Get
 Route.get('/calificar/info', 'CalificacioneController.getSalonesYMaterias');
 Route.get('/calificaciones/:_id/:ciclo', 'CalificacioneController.GetCalificacionesAlumno');
 Route.post('/pipi', 'CalificacioneController.insertpipi');
+Route.post('/popo', 'CalificacioneController.validapopo')

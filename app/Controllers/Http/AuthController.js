@@ -93,7 +93,8 @@ class AuthController {
                 token: token,
                 tipo: tipoUsuario,
                 alumno: alumno,
-                _id: idAlumno
+                _id: idAlumno,
+                status: 200
             });
         } catch (error) {
             console.log(error);

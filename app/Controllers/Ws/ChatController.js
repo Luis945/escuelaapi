@@ -5,6 +5,10 @@ class ChatController {
     this.socket = socket
     this.request = request
   }
+
+
+  
+
 }
 
 module.exports = ChatController

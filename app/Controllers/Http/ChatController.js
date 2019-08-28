@@ -1,10 +1,10 @@
 'use strict'
 
 const Chat = use('App/Models/Chat');
-
+const Ws = use('Ws');
 class ChatController {
 
-    async guardarMensaje({response,request}){
+    async guardarMensaje({response,request}) {
         var {idChat, mensaje, emisor}= request.all();
 
         var mensajito = {
@@ -20,14 +20,18 @@ class ChatController {
             {$push: {"Mensajes": {Mensaje: mensaje, Emisor: emisor}}},
             {safe: true, upsert: true},
             function(err, model) {
-                console.log(err);
+                if (!err) {
+                    var channel = Ws.getChannel('salon:*');
+                    var topic = channel.topic('salon:' + idChat);
+                    topic.broadcast('mensaje', {emisor, mensaje});
+                }
             }
         );
     
         // var kek = await Chat.findOne({Salon: idChat});
 
         // console.log(kek)
-        return response.status(200).json({msg: kek});
+        return response.status(200).json({msg: "guardao"});
       }
 
     async historial({params, response}) {

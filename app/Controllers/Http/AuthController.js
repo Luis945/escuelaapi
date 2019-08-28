@@ -75,7 +75,7 @@ class AuthController {
             // console.log(idAlumno);
             if (idAlumno !=  "") {
                 await Salon.find({
-                    Ciclo: "2017"//ciclo.toString(),
+                    Ciclo: ciclo.toString(),
                 }).populate({
                     path: 'Alumnos',
                     match: { _id: {$in: [idAlumno]} }
@@ -101,7 +101,7 @@ class AuthController {
                     if(usuario) {
                         tipoUsuario = "profe";
                         await Salon.find({
-                            Ciclo: "2017"//ciclo.toString(),
+                            Ciclo: ciclo.toString(),
                         }).populate({
                             path: 'Maestro',
                             match: { _id: {$in: [usuario._id]} }

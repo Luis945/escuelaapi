@@ -20,13 +20,17 @@ class AlertaController {
       Descripcion,
       Estado,
     });
+    console.log(nuevo);
     await nuevo.save();
-    return response.status(201).json({msg:'guardado',nuevo});
+    await Alerta.find({'maestro':maestro}).populate('Maestro').populate('Alumno').exec((err,data)=>{
+      return response.status(200).json({msg:'alertas de maestro',data});
+    });
   }
   async find_maestro({response,params}){
+    console.log(params);
    await Alerta.find({'maestro':params.id}).populate('Maestro').populate('Alumno').exec((err,data)=>{
      return response.status(200).json({msg:'alertas de maestro',data});
-   })
+   });
   }
   async find_alumno({response,params}){
     await Alerta.find({'alumno':params.id}).populate('Maestro').populate('Alumno').exec((err,data)=>{
@@ -55,7 +59,9 @@ class AlertaController {
   });
   }
   async getsalonProfe({response,params}){
-    await Salon.find({'Maestro',params.id}).populate('Alumnos').populate('Maestro').exec((err,salones)=>{
+
+    await Salon.find({'Maestro':params.id}).populate('Alumnos').exec((err,salones)=>{
+
       return response.status(200).json({msg:'lista de alumnos',salones});
     });
   }

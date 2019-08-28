@@ -76,7 +76,7 @@ Route.get('/alertas/ver/alumno/:id','AlertaController.find_alumno');
 Route.post('/alertas/guardar/','AlertaController.save');
 Route.post('/alertas/editar/','AlertaController.edit');
 Route.delete('/alertas/remover/:id','AlertaController.remove');
-Route.get('/alertas/profesor/', 'AlertaController.getsalonProfe');
+Route.get('/alertas/profesor/:id', 'AlertaController.getsalonProfe');
 
 /* Chat padres y pofes */
 Route.get('/chat/:id', 'ChatController.historial');

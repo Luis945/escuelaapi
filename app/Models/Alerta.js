@@ -4,8 +4,8 @@ const mongoose = use('Mongoose')
 var Schema = mongoose.Schema;
 
 let schema = mongoose.Schema({
-  alumno:{ type: schema.Types.ObjectId, ref: 'Alumno' },
-  maestro:{ type: schema.Types.ObjectId, ref: 'Maestro'},
+  alumno:{ type: Schema.Types.ObjectId, ref: 'Alumno' },
+  maestro:{ type: Schema.Types.ObjectId, ref: 'Maestro'},
   Titulo:String,
   Descripcion:String,
   Estado:String
@@ -15,4 +15,4 @@ let schema = mongoose.Schema({
   timestamps: true
 })
 
-module.exports = mongoose.model('Alertas', schema)
+module.exports = mongoose.model('Alerta', schema)

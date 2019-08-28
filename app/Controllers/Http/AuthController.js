@@ -50,7 +50,7 @@ class AuthController {
                     'Datos_secundarios': { $elemMatch: { 'Curp' : curp, 'nombre_padre_tutor': matricula} }
                 });
                 console.log(usuario)
-                if (usuario != null) { 
+                if (usuario != null) {
                     console.log("asignando")
                     tipoUsuario = "jefesito";
                     alumno = usuario.Nombre + ' ' + usuario.Apellido_paterno + ' ' + usuario.Apellido_materno;
@@ -60,12 +60,12 @@ class AuthController {
                 console.log("padre")
             } else {
                 usuario = await Alumno.findOne({
-                                Matricula: matricula, 
+                                Matricula: matricula,
                                 'Datos_secundarios': { $elemMatch: { 'Curp' : curp} }
                             });
                 if (usuario) { tipoUsuario = "alumno";
                     alumno = usuario.Nombre + ' ' + usuario.Apellido_paterno + ' ' + usuario.Apellido_materno;
-                    idAlumno = usuario._id.toString(); 
+                    idAlumno = usuario._id.toString();
                 }
                 console.log("alumno encontrao")
             }
@@ -100,6 +100,9 @@ class AuthController {
 
                     if(usuario) {
                         tipoUsuario = "profe";
+                        idAlumno=usuario._id;
+                        console.log(usuario._id);
+                        console.log(idAlumno);
                         // await Salon.find({
                         //     Ciclo: "2017"//ciclo.toString(),
                         // }).populate({
@@ -156,16 +159,16 @@ class AuthController {
 
         if (typeof cabecera !== 'undefined') {
             var split = cabecera.split(" ");
-            
+
             request.token = split[0];
         } else {
             return false;
         }
 
         try {
-       
+
             var p = jwt.verify(request.token, "LAMEv3");
-          
+
             return p.hasOwnProperty('data');
         } catch(err) {
             console.log(err)
@@ -223,10 +226,10 @@ class AuthController {
     curpValida(curp) {
         var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
             validado = curp.match(re);
-        
+
         if (!validado)  //Coincide con el formato general?
             return false;
-        
+
         //Validar que coincida el dígito verificador
         function digitoVerificador(curp17) {
             //Fuente https://consultas.curp.gob.mx/CurpSP/
@@ -239,10 +242,10 @@ class AuthController {
             if (lngDigito == 10) return 0;
             return lngDigito;
         }
-    
-        if (validado[2] != digitoVerificador(validado[1])) 
+
+        if (validado[2] != digitoVerificador(validado[1]))
             return false;
-            
+
         return true; //Validado
     }
 }

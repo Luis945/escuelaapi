@@ -48,6 +48,8 @@ class CalificacioneController {
 
         salon = await Salon.findOne({Grado: grado, Seccion: seccion, Ciclo: ciclo}).populate('Alumnos');//.populate('Materias');
 
+        console.log(salon);
+
         salon['Alumnos'].forEach(alumno => {
             alumno.calificaciones = alumno.calificaciones.filter((calificacion) => {
                 return calificacion.id_materia == materia;

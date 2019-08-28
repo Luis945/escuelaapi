@@ -21,4 +21,16 @@ Ws.channel('chat', ({ socket }) => {
 
 
 //Probando
-Ws.channel('Prueba','AlumnoController');  
+Ws.channel('Prueba','AlumnoController');
+
+
+
+
+
+
+//mensajes de un grupo
+Ws.channel('salon:*', 'ChatController');
+
+
+
+

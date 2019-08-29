@@ -2,7 +2,7 @@
 const Salon= use('App/Models/Salon');
 const Alumno = use('App/Models/Alumno');
 const Materia = use('App/Models/Materia');
-const Maestro = use('App/Models/Maestro');
+const Maestros = use('App/Models/Maestro');
 const Chat = use('App/Models/Chat');
 
 class SalonController {
@@ -30,7 +30,7 @@ class SalonController {
         //console.log("-------------------------------------------------------------");
 
         var _idchido;
-
+        var _idprofe;
         for (let index = 0; index < salon.Alumnos.length; index++) {
           const element = salon.Alumnos[index];
           _idchido = element;
@@ -41,7 +41,15 @@ class SalonController {
           });
 
           await Alumno.updateOne({ _id:_idchido }, { Status: 'asignado' });
+
         }
+        console.log(salon.Maestro+"holaalalofjaeuihg")
+        var _idprofe = salon.Maestro
+        await Maestros.findOneAndUpdate({ _id:_idprofe}, { Status: 'asignado' });
+      
+
+          
+
 
         //hasta aqui es mio octavioooooooooooooooooooooooooooo
 
@@ -162,6 +170,16 @@ class SalonController {
       return  response.status(200).json(salon);
 
       
+    }
+
+    async getMaestros({response}){
+      var obtenido;
+      await Maestros.find({Status:'sin_asignar'}).exec((error,datos)=>{
+        obtenido=datos;
+        console.log(obtenido)
+      })
+  
+      return response.status(200).json(obtenido);
     }
 }
 

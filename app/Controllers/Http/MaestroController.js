@@ -32,13 +32,14 @@ class MaestroController {
   }
 
   async RegistroMaestro({response,request}){
-
+    var Status = 'sin_asignar'
     var {Nombre,Apellido_paterno,Apellido_materno,Fecha_nacimiento,Rfc,Fotografia,Direccion,Telefono} = request.all();
     var nuevo= new Maestro({
       Nombre,
       Apellido_paterno,
       Apellido_materno,
       Fecha_nacimiento,
+      Status,
       Rfc,
       Fotografia,
       Direccion,

@@ -49,13 +49,13 @@ class AuthController {
                 usuario = await Alumno.findOne({
                     'Datos_secundarios': { $elemMatch: { 'Curp' : curp, 'nombre_padre_tutor': matricula} }
                 });
-                console.log(usuario)
+                // console.log(usuario)
                 if (usuario != null) {
                     console.log("asignando")
                     tipoUsuario = "jefesito";
                     alumno = usuario.Nombre + ' ' + usuario.Apellido_paterno + ' ' + usuario.Apellido_materno;
                     idAlumno = usuario._id.toString();
-                    console.log(tipoUsuario)
+                    // console.log(tipoUsuario)
                 }
                 console.log("padre")
             } else {
@@ -82,7 +82,7 @@ class AuthController {
                 })
                 .exec((err, salones) => {
                     saloncito = salones.find((salon) => {
-                        console.log(salon)
+                        // console.log(salon)
                         return salon.Alumnos.length > 0;
                     });
                 });
@@ -91,8 +91,7 @@ class AuthController {
             }
 
             if ( tipoUsuario === "") {
-                console.log("maestro")
-                if (this.rfcValido(matricula)) {
+              
                     usuario = await Maistro.findOne({
                         Rfc: matricula,
                         Telefono: curp
@@ -101,20 +100,6 @@ class AuthController {
                     if(usuario) {
                         tipoUsuario = "profe";
                         idAlumno=usuario._id;
-                        console.log(usuario._id);
-                        console.log(idAlumno);
-                        // await Salon.find({
-                        //     Ciclo: "2017"//ciclo.toString(),
-                        // }).populate({
-                        //     path: 'Maestro',
-                        //     // match: { _id: {$in: [idAlumno]} }
-                        // })
-                        // .exec((err, salones) => {
-                        //     salones.find((salon) => {
-                        //         console.log(salon)
-                        //         return salon.Alumnos.length > 0;
-                        //     });
-                        // });
                         await Salon.find({
                             Ciclo: ciclo.toString(),
                         }).populate({
@@ -123,12 +108,14 @@ class AuthController {
                         })
                         .exec((err, salones) => {
                             saloncito = salones.find((salon) => {
-                                console.log(salon)
-                                return salon.Alumnos.length > 0;
+                                console.log(salon);
+                                if (salon.Maestro){
+                                    return salon.Maestro._id.toString() == idAlumno.toString();
+                                }
+                                
                             });
                         });
                     }
-                }
             }
 
             // console.log("okenenne")
@@ -147,6 +134,7 @@ class AuthController {
                 if (tipoUsuario != "profe") {
                     nombrepapi = usuario.Datos_secundarios[0].nombre_padre_tutor;
                 } else {
+            
                     nombrepapi = 'Prof. ' + saloncito.Maestro.Nombre + ' ' + saloncito.Maestro.Apellido_paterno;
 
                 }

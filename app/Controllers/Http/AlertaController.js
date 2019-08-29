@@ -24,20 +24,20 @@ class AlertaController {
       Estado,
     });
     await nuevo.save();
-    await Alerta.find({'maestro':maestro}).populate('maestro').populate('alumno').exec((err,data)=>{
+    await Alerta.find({'maestro':maestro}).populate('maestro').populate('alumno').sort({updatedAt: 'desc'}).exec((err,data)=>{
 
       return response.status(200).json({msg:'alertas de maestro',data});
     });
   }
   async find_maestro({response,params}){
 
-    await Alerta.find({'maestro':params.id}).populate('maestro').populate('alumno').exec((err,data)=>{
+    await Alerta.find({'maestro':params.id}).populate('maestro').populate('alumno').sort({updatedAt: 'desc'}).exec((err,data)=>{
 
       return response.status(200).json({msg:'alertas de maestro',data});
     });
   }
   async find_alumno({response,params}){
-    await Alerta.find({'alumno':params.id}).populate('Maestro').populate('Alumno').exec((err,data)=>{
+    await Alerta.find({'alumno':params.id}).populate('maestro').populate('alumno').sort({updatedAt: 'desc'}).exec((err,data)=>{
       return response.status(200).json({msg:'alertas de alumno',data});
     })
   }
@@ -58,7 +58,7 @@ class AlertaController {
   }
   async remove({response,params}){
     await Alerta.findByIdAndRemove(params.id).exec();
-    await Alerta.find({'maestro':params.maestro}).populate('maestro').populate('alumno').exec((err,alertas)=>{
+    await Alerta.find({'maestro':params.maestro}).populate('maestro').populate('alumno').sort({updatedAt: 'desc'}).exec((err,alertas)=>{
     return response.status(200).json({msg:'elemento eliminado',alertas})
   });
   }
@@ -67,6 +67,12 @@ class AlertaController {
     await Salon.find({'Maestro':params.id}).populate('Alumnos').exec((err,salones)=>{
 
       return response.status(200).json({msg:'lista de alumnos',salones});
+    });
+  }
+  async getsalonAlumno({response,params}){
+    await Salon.find({'Alumnos':{$in:[params.id]}}).populate('Alumnos').exec((err,data)=>{
+
+      return response.status(200).json({msg:'salon',data});
     });
   }
 }

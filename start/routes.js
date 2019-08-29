@@ -67,6 +67,7 @@ Route.get('/salon/:grado/:seccion/:ciclo/:materia', 'CalificacioneController.Get
 Route.post('/pipi', 'CalificacioneController.insertpipi');
 Route.get('/calificar/info', 'CalificacioneController.getSalonesYMaterias');
 Route.get('/calificaciones/:_id/:ciclo', 'CalificacioneController.GetCalificacionesAlumno');
+Route.post('/valit', 'CalificacioneController.validapopo');
 
 /** alertas maestros a alumnos */
 

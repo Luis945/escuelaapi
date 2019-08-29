@@ -20,6 +20,15 @@ class SalonController {
           Materias
         });
 
+        console.log("-------------------------------------------------------------");
+        console.log("-------------------------------------------------------------");
+        console.log("-------------------------------------------------------------");
+        console.log(salon);
+
+        console.log("-------------------------------------------------------------");
+        console.log("-------------------------------------------------------------");
+        console.log("-------------------------------------------------------------");
+
         var _idchido;
 
         for (let index = 0; index < salon.Alumnos.length; index++) {
@@ -46,16 +55,32 @@ class SalonController {
       //se inserta a los alumnos calificaciones en 0 por cada unidad y materia
       //await no jala en un foreach :'( ahi dispensen el desmadre
       for (let i = 0; i < Alumnos.length; i++) {
-        // var calificaciones;
-        console.log(Alumnos[i]);
+        console.log("-------------------------------------------------------------");
+        console.log("ITERANDO EL ARREGLO DE ALUMNOS QUE CONTIENE:");
+        console.log(Alumnos);
+        console.log("ITERANDO EL ARREGLO DE ALUMNOS QUE CONTIENE");
         for (let j = 0; j < materiasAInsertar.length; j++) {
           var calificaciones;
+          console.log("-------------------------------------------------------------");
+        console.log("ITERANDO EL ARREGLO DE MATERIAS QUE CONTIENE:");
+        console.log(materiasAInsertar);
+        console.log("ITERANDO EL ARREGLO DE MATERIAS QUE CONTIENE");
+        console.log("-------------------------------------------------------------");
           for (let k = 0; k < materiasAInsertar[j].unidades.length; k++) {
             calificaciones = {
               id_materia: materiasAInsertar[j]._id,
               unidad: materiasAInsertar[j].unidades[k].Num_unidad,
               calificacion: 0
             };
+
+            console.log("ITERANDO EL ARREGLO DE UNIDADES QUE CONTIENE:");
+          console.log(materiasAInsertar[j].unidades);
+          console.log("ITERANDO EL ARREGLO DE UNIDADES QUE CONTIENE");
+          console.log("-------------------------------------------------------------");
+          console.log("PREVIO A GUARDAR");
+            console.log(calificaciones);
+          console.log("PREVIO A GUARDAR");
+          console.log("-------------------------------------------------------------");
             await Alumno.findOneAndUpdate({_id: Alumnos[i]._id}, {$push: {calificaciones: calificaciones}});
             console.log("materia guardada???");
           }

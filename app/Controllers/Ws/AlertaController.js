@@ -6,8 +6,8 @@ class AlertaController {
     this.socket = socket
     this.request = request
   }
-  onMessage(){
-    this.socket.broadcastToAll('alerta','hola');
+  onMessage(mesage){
+    this.socket.broadcast('message',mesage);
   }
 }
 

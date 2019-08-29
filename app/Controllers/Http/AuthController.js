@@ -82,7 +82,7 @@ class AuthController {
                 })
                 .exec((err, salones) => {
                     saloncito = salones.find((salon) => {
-                        // console.log(salon)
+                         //console.log(salon)
                         return salon.Alumnos.length > 0;
                     });
                 });
@@ -148,7 +148,7 @@ class AuthController {
                 alumno: alumno,
                 _id: idAlumno,
                 status: 200,
-                ciclo: ciclo,
+                ciclo: ciclo,   
                 salon: salonid,
                 tutor: nombrepapi,
                 salonNom: salonNom

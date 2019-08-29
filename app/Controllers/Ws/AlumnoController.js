@@ -7,7 +7,7 @@ class AlumnoController {
   }
 
   onMessage(message) {
-    this.socket.broadcastToAll('message', message);
+    this.socket.broadcast('message', message);
     console.log(message);
   }
 }

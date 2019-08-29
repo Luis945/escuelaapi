@@ -5,6 +5,9 @@ const Materia = use('App/Models/Materia');
 const Maestro = use('App/Models/Maestro');
 const Salon= use('App/Models/Salon');
 
+const mongoose = use('Mongoose')
+var Schema = mongoose.Schema;
+
 class AlertaController {
   async show({response}){
     await Alertas.find({}).populate('Maestro').populate('Alumno').exec((err,data)=>{
@@ -20,17 +23,18 @@ class AlertaController {
       Descripcion,
       Estado,
     });
-    console.log(nuevo);
     await nuevo.save();
-    await Alerta.find({'maestro':maestro}).populate('Maestro').populate('Alumno').exec((err,data)=>{
+    await Alerta.find({'maestro':maestro}).populate('maestro').populate('alumno').exec((err,data)=>{
+
       return response.status(200).json({msg:'alertas de maestro',data});
     });
   }
   async find_maestro({response,params}){
-    console.log(params);
-   await Alerta.find({'maestro':params.id}).populate('Maestro').populate('Alumno').exec((err,data)=>{
-     return response.status(200).json({msg:'alertas de maestro',data});
-   });
+
+    await Alerta.find({'maestro':params.id}).populate('maestro').populate('alumno').exec((err,data)=>{
+
+      return response.status(200).json({msg:'alertas de maestro',data});
+    });
   }
   async find_alumno({response,params}){
     await Alerta.find({'alumno':params.id}).populate('Maestro').populate('Alumno').exec((err,data)=>{
@@ -54,7 +58,7 @@ class AlertaController {
   }
   async remove({response,params}){
     await Alerta.findByIdAndRemove(params.id).exec();
-    await Alerta.find({}).exec((err,alertas)=>{
+    await Alerta.find({'maestro':params.maestro}).populate('maestro').populate('alumno').exec((err,alertas)=>{
     return response.status(200).json({msg:'elemento eliminado',alertas})
   });
   }

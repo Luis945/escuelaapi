@@ -33,4 +33,5 @@ Ws.channel('salon:*', 'ChatController');
 
 
 
-
+//alertas para alumno
+Ws.channel('alerta:*','AlertaController')

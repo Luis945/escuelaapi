@@ -122,7 +122,7 @@ class SalonController {
 
     async setMaestro({response,request}){
       var {Nombre,Apellido_paterno,Apellido_materno,Fecha_nacimiento,Rfc}= request.all();
-      var maestro = new Maestro({
+      var maestro = new Maestros({
         Nombre,Apellido_paterno,Apellido_materno,Fecha_nacimiento,Rfc
       });
       await maestro.save();
@@ -137,7 +137,7 @@ class SalonController {
 
     async VerMaestros({response}){
       var maestros;
-      await Maestro.find({},function(err,datos){
+      await Maestros.find({},function(err,datos){
         maestros= datos;
       });
       return response.status(200).json(maestros);

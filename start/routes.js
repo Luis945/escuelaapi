@@ -59,7 +59,7 @@ Route.get('/verMaestros_octa','SalonController.getMaestros');
 Route.post('/eliminaralumnosalon/:id','SalonController.eliminaralumnosalon');
 /*-------MAESTROS------*/
 Route.post('/RegistroMaestro','MaestroController.RegistroMaestro');
-Route.post('/VerMaestros','MaestroController.VerMaestros');
+Route.get('/VerMaestros','MaestroController.VerMaestros');
 Route.post('/ActualizaMaestro','MaestroController.ActualizaMaestro');
 
 /* Calificaciones */
@@ -75,12 +75,13 @@ Route.post('/valit', 'CalificacioneController.validapopo');
 Route.get('/alertas/ver/','AlertaController.show');
 Route.get('/alertas/ver/maestro/:id','AlertaController.find_maestro');
 Route.get('/alertas/ver/alumno/:id','AlertaController.find_alumno');
+Route.get('/alertas/ver/alumno2/:id','AlertaController.find_alumno2');
 Route.post('/alertas/guardar/','AlertaController.save');
 Route.post('/alertas/editar/','AlertaController.edit');
 Route.delete('/alertas/remover/:id/:maestro','AlertaController.remove');
 Route.get('/alertas/profesor/:id', 'AlertaController.getsalonProfe');
 Route.get('/alertas/alumno/:id','AlertaController.getsalonAlumno');
-Route.get('/alertas/alumnomat/:id','AlertaController.getsalonAlumnoMat')
+Route.get('/salonAlumno/:matricula','AlertaController.getidsalonAlumno')
 
 /* Chat padres y pofes */
 Route.get('/chat/:id', 'ChatController.historial');

@@ -41,6 +41,12 @@ class AlertaController {
       return response.status(200).json({msg:'alertas de alumno',data});
     })
   }
+
+  async find_alumno2({response,params}){
+    await Alerta.find({'alumno':params.id}).sort({updatedAt: 'desc'}).exec((err,data)=>{
+      return response.status(200).json(data);
+    })
+  }
   async edit({response,request}){
     var { id,alumno,maestro,Titulo,Descripcion,Estado} = request.all();
     await Alerta.findOne({'_id':id}).exec((err,alerta)=>{
@@ -75,6 +81,22 @@ class AlertaController {
       return response.status(200).json({msg:'salon',data});
     });
   }
+
+
+  async getidsalonAlumno({response,params}){
+    var salon;
+    var query;
+  await Alumno.findOne({'Matricula':params.matricula}).exec().then( data=>{
+        query=   Salon.findOne({'Alumnos':{$in:[data._id]}});
+    });
+   await query.exec().then(doc=>{
+     console.log( doc);
+     salon= doc;
+   });
+   return response.status(201).json(salon)
+  }
+
+
 }
 
 module.exports = AlertaController
